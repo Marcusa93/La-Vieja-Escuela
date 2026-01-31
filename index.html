@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>La Vieja Escuela — Neo‑Bodegón · Bar Café · Tucumán</title>
+  <meta name="description" content="Nostalgia activa, técnica real y una cantina que abraza lo clásico. Café con oficio y platos que reconfortan. Neo-bodegón en Tucumán." />
+  <meta name="theme-color" content="#0a0a0a" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header" id="siteHeader">
+    <a href="#" class="logo-wrap" aria-label="La Vieja Escuela - Inicio">
+      <img src="Manual%20de%20marca/logo%20positivo.png" alt="La Vieja Escuela" />
+    </a>
+    <nav class="site-nav" aria-label="Navegación principal">
+      <a href="#menu">Menú</a>
+      <a href="#proximamente">Próximamente</a>
+      <a href="#aula">Aula Abierta</a>
+      <a href="#ubicacion">Ubicación</a>
+    </nav>
+    <div class="header-cta">
+      <button class="btn btn-outline" data-scroll="#menu">Ver Menú</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section with Background Image -->
+    <section class="hero" aria-label="Bienvenida">
+      <div class="hero-background">
+        <img src="Fotos%20antes%20-%20render/Render/35a57c5f-1818-4e81-bccd-b667b930b5d7.JPG" alt="Interior de La Vieja Escuela" loading="eager" />
+      </div>
+      <div class="hero-overlay"></div>
+      
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span>✦</span> Próximamente en Tucumán
+        </div>
+        <h1>La Vieja Escuela</h1>
+        <p class="eyebrow">Neo‑Bodegón · Bar Café · Tucumán</p>
+        <p class="hero-subtitle">
+          Nostalgia activa, técnica real y una cantina que abraza lo clásico. 
+          Un espacio para comer, aprender y encontrarnos. 
+          Café con oficio y platos que reconfortan.
+        </p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" data-scroll="#menu">Explorar Menú</button>
+          <button class="btn btn-ghost" data-scroll="#proximamente">Ver Agenda</button>
+        </div>
+        <div class="hero-tags">
+          <span class="sticker">Abundante</span>
+          <span class="sticker sticker--accent">Bonito</span>
+          <span class="sticker sticker--teal">Cafecito y arrancamos</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="section menu">
+      <div class="section-head">
+        <h2>Menú Vivo</h2>
+        <p>Rotamos destacados según el momento del día. Elegí tu plan y te mostramos lo mejor.</p>
+      </div>
+
+      <div class="menu-controls">
+        <div class="pill-group" role="tablist" aria-label="Momento del día">
+          <button class="pill is-active" data-daypart="manana">Mañana</button>
+          <button class="pill" data-daypart="tarde">Tarde</button>
+          <button class="pill" data-daypart="noche">Noche</button>
+        </div>
+        <div class="menu-highlight" id="menuHighlight">
+          <div class="menu-highlight__label">★ Destacado</div>
+          <div class="menu-highlight__title">Combo La Vieja Escuela</div>
+          <div class="menu-highlight__desc">Café o infusión + 2 medialunas o tortillas.</div>
+        </div>
+      </div>
+
+      <div class="menu-tabs" role="tablist" aria-label="Categorías del menú">
+        <button class="tab is-active" data-category="desayuno">Desayuno & Merienda</button>
+        <button class="tab" data-category="cafe">Café & Infusiones</button>
+        <button class="tab" data-category="dulce">Cosas Dulces</button>
+        <button class="tab" data-category="salado">Cosas Saladas</button>
+        <button class="tab" data-category="cantina">Cantina Neo‑Bodegón</button>
+      </div>
+
+      <div class="menu-grid" id="menuGrid" aria-live="polite"></div>
+    </section>
+
+    <!-- Proximamente Section -->
+    <section id="proximamente" class="section proximamente">
+      <div class="section-head">
+        <h2>Próximamente</h2>
+        <p>La apertura se viene con agenda, panadería propia y noches de bodegón.</p>
+      </div>
+      <div class="proxi-layout">
+        <div class="proxi-poster">
+          <img src="Manual%20de%20marca/Recursos%20graficos/proximamente1.png" alt="Próximamente - Fachada La Vieja Escuela" />
+        </div>
+        <div class="proxi-info">
+          <h3>Cartelera Inicial</h3>
+          <ul>
+            <li><strong>Semana 1:</strong> Café de especialidad + combos de merienda.</li>
+            <li><strong>Semana 2:</strong> Panes de autor y sándwiches de barrio.</li>
+            <li><strong>Semana 3:</strong> Noches de bodegón con platos clásicos.</li>
+          </ul>
+          <div class="notify">
+            <input type="email" placeholder="Dejame tu mail para avisarte" aria-label="Email" />
+            <button class="btn btn-primary" id="notifyBtn">Avisame</button>
+          </div>
+          <p class="fine">Sin spam. Te avisamos solo novedades reales.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Aula Section -->
+    <section id="aula" class="section aula">
+      <div class="section-head">
+        <h2>Aula Abierta</h2>
+        <p>Charlas cortas, tecnología aplicada y cultura cafetería. Un lugar para aprender sin solemnidad.</p>
+      </div>
+      <div class="aula-grid">
+        <article class="event">
+          <h3>Prompting para la vida real</h3>
+          <p>IA aplicada al trabajo diario, explicado simple.</p>
+          <span class="event-meta">Miércoles 19:00 · 45 min</span>
+        </article>
+        <article class="event">
+          <h3>El café no se adivina</h3>
+          <p>Origen, molienda y método: cómo se logra consistencia.</p>
+          <span class="event-meta">Jueves 18:30 · 60 min</span>
+        </article>
+        <article class="event">
+          <h3>Bodegón 2.0</h3>
+          <p>La técnica que afina un clásico sin perder su alma.</p>
+          <span class="event-meta">Sábado 11:30 · 50 min</span>
+        </article>
+      </div>
+      <div class="notify inline">
+        <input type="email" placeholder="Sumate a la lista del aula" aria-label="Email" />
+        <button class="btn btn-outline" id="aulaBtn">Sumarme</button>
+      </div>
+    </section>
+
+    <!-- Filosofia Section -->
+    <section class="section filosofia">
+      <div class="section-head">
+        <h2>Filosofía</h2>
+        <p>Un neobodegón que respeta la historia y la eleva con técnica.</p>
+      </div>
+      <div class="filosofia-grid">
+        <div class="pill-card">
+          <h3>Calidad Técnica</h3>
+          <p>Gastronomía simple, bien ejecutada. Nada raro, todo perfecto.</p>
+        </div>
+        <div class="pill-card">
+          <h3>Nostalgia Activa</h3>
+          <p>90s, barrio y confort; con una experiencia moderna.</p>
+        </div>
+        <div class="pill-card">
+          <h3>Flexibilidad Viva</h3>
+          <p>Menú corto y dinámico. Rotamos según estación y demanda.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ubicacion Section -->
+    <section id="ubicacion" class="section ubicacion">
+      <div class="section-head">
+        <h2>Ubicación y Horarios</h2>
+        <p>Barrio Norte, Tucumán. Un refugio para trabajar, comer y volver.</p>
+      </div>
+      <div class="ubicacion-grid">
+        <div class="map-card">
+          <div class="map-placeholder">📍 Mapa próximamente</div>
+          <div class="map-info">
+            <strong>Dirección:</strong> Av. ______ 1234, Tucumán<br />
+            <strong>Horarios:</strong> Lun a Dom · 8:00 a 23:00
+          </div>
+        </div>
+        <div class="contact-card">
+          <h3>Contacto</h3>
+          <p>Reservas, eventos y consultas.</p>
+          <div class="contact-info">
+            <div>WhatsApp: +54 9 381 ___ ____</div>
+            <div>Mail: hola@laviejaescuela.com</div>
+            <div>Instagram: @laviejaescuela</div>
+          </div>
+          <button class="btn btn-primary" data-scroll="#menu">Ver Menú Completo</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ticker -->
+    <section class="ticker" aria-hidden="true">
+      <div class="ticker__track">
+        <span>CAFECITO Y ARRANCAMOS • NEO‑BODEGÓN • ABUNDANTE • BONITO • CAFECITO Y ARRANCAMOS • NEO‑BODEGÓN • ABUNDANTE • BONITO • </span>
+        <span>CAFECITO Y ARRANCAMOS • NEO‑BODEGÓN • ABUNDANTE • BONITO • CAFECITO Y ARRANCAMOS • NEO‑BODEGÓN • ABUNDANTE • BONITO • </span>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <img src="Manual%20de%20marca/logo%20positivo.png" alt="La Vieja Escuela" />
+      </div>
+      <nav class="footer-links" aria-label="Enlaces del footer">
+        <a href="#menu">Menú</a>
+        <a href="#proximamente">Próximamente</a>
+        <a href="#aula">Aula Abierta</a>
+        <a href="#ubicacion">Ubicación</a>
+      </nav>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram" title="Instagram">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+        <a href="#" aria-label="WhatsApp" title="WhatsApp">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-note">La Vieja Escuela — Neo‑Bodegón & Café · Tucumán, Argentina</div>
+      <div class="footer-note">© 2026 · Hecho con ☕</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
