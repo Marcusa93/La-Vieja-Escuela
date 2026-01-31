@@ -42,17 +42,25 @@
    CSS VARIABLES - DARK PREMIUM THEME
    -------------------------------------------------------------------------- */
 :root {
-  /* Colors */
-  --bg-primary: #0a0a0a;
-  --bg-secondary: #141414;
-  --bg-card: #1a1a1a;
-  --bg-elevated: #222222;
+  /* Colors - Dark Premium con paleta de marca */
+  --bg-primary: #0e0e0e;
+  --bg-secondary: #161616;
+  --bg-card: #1c1c1c;
+  --bg-elevated: #252525;
 
+  /* Turquesa de marca */
   --teal: #166f85;
   --teal-light: #1d8fa8;
   --teal-dark: #0f4f61;
-  --teal-glow: rgba(22, 111, 133, 0.3);
+  --teal-glow: rgba(22, 111, 133, 0.35);
 
+  /* Naranja de marca (en lugar de gold) */
+  --accent: #ed5c35;
+  --accent-light: #ff7a56;
+  --accent-dark: #c44920;
+  --accent-glow: rgba(237, 92, 53, 0.25);
+
+  /* Mantener gold para detalles premium */
   --gold: #c9a227;
   --gold-light: #e8c547;
   --gold-dark: #9a7b1c;
@@ -63,8 +71,8 @@
   --coral-dark: #c44920;
 
   --text-primary: #f5f5f5;
-  --text-secondary: #a0a0a0;
-  --text-muted: #666666;
+  --text-secondary: #b0b0b0;
+  --text-muted: #707070;
 
   --cream: #f1eee9;
   --paper: #e3e3e3;
@@ -99,98 +107,6 @@
   --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.5);
   --shadow-glow-teal: 0 0 30px var(--teal-glow);
   --shadow-glow-gold: 0 0 30px var(--gold-glow);
-}
-
-/* --------------------------------------------------------------------------
-   FLOATING COFFEE CUP ANIMATION
-   -------------------------------------------------------------------------- */
-.floating-cup {
-  position: fixed;
-  width: 60px;
-  height: 60px;
-  z-index: 50;
-  pointer-events: none;
-  opacity: 0.85;
-  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
-  animation: floatPath 25s ease-in-out infinite, cupSpin 8s linear infinite;
-}
-
-.floating-cup img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-@keyframes floatPath {
-  0% {
-    top: 15%;
-    left: -80px;
-    transform: scale(0.8);
-  }
-
-  10% {
-    top: 25%;
-    left: 15%;
-    transform: scale(1);
-  }
-
-  25% {
-    top: 45%;
-    left: 35%;
-    transform: scale(0.9);
-  }
-
-  40% {
-    top: 20%;
-    left: 55%;
-    transform: scale(1.1);
-  }
-
-  55% {
-    top: 60%;
-    left: 70%;
-    transform: scale(0.95);
-  }
-
-  70% {
-    top: 35%;
-    left: 85%;
-    transform: scale(1);
-  }
-
-  85% {
-    top: 70%;
-    left: 60%;
-    transform: scale(0.9);
-  }
-
-  100% {
-    top: 15%;
-    left: calc(100% + 80px);
-    transform: scale(0.8);
-  }
-}
-
-@keyframes cupSpin {
-  0% {
-    rotate: 0deg;
-  }
-
-  25% {
-    rotate: 10deg;
-  }
-
-  50% {
-    rotate: 0deg;
-  }
-
-  75% {
-    rotate: -10deg;
-  }
-
-  100% {
-    rotate: 0deg;
-  }
 }
 
 /* --------------------------------------------------------------------------
@@ -1276,4 +1192,92 @@ h3 {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* --------------------------------------------------------------------------
+   FLOATING COFFEE CUP ANIMATION
+   -------------------------------------------------------------------------- */
+.floating-cup {
+  position: fixed;
+  width: 55px;
+  height: 55px;
+  z-index: 50;
+  pointer-events: none;
+  opacity: 0.85;
+  filter: drop-shadow(2px 4px 8px rgba(0, 0, 0, 0.4));
+  animation: floatPath 28s ease-in-out infinite, cupWobble 4s ease-in-out infinite;
+}
+
+.floating-cup img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+@keyframes floatPath {
+  0% {
+    top: 15%;
+    left: -70px;
+  }
+
+  15% {
+    top: 35%;
+    left: 18%;
+  }
+
+  30% {
+    top: 55%;
+    left: 42%;
+  }
+
+  45% {
+    top: 28%;
+    left: 68%;
+  }
+
+  60% {
+    top: 50%;
+    left: 85%;
+  }
+
+  75% {
+    top: 38%;
+    left: 55%;
+  }
+
+  90% {
+    top: 62%;
+    left: 28%;
+  }
+
+  100% {
+    top: 15%;
+    left: calc(100% + 70px);
+  }
+}
+
+@keyframes cupWobble {
+
+  0%,
+  100% {
+    transform: rotate(-6deg);
+  }
+
+  50% {
+    transform: rotate(6deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .floating-cup {
+    width: 42px;
+    height: 42px;
+  }
+}
+
+@media (max-width: 480px) {
+  .floating-cup {
+    width: 35px;
+    height: 35px;
+  }
 }
