@@ -39,28 +39,36 @@
 }
 
 /* --------------------------------------------------------------------------
-   CSS VARIABLES - DARK PREMIUM THEME
+   CSS VARIABLES - BRAND COLOR PALETTE (Sin Negro)
    -------------------------------------------------------------------------- */
 :root {
-  /* Colors - Dark Premium con paleta de marca */
-  --bg-primary: #0e0e0e;
-  --bg-secondary: #161616;
-  --bg-card: #1c1c1c;
-  --bg-elevated: #252525;
+  /* Backgrounds - Basados en Turquesa y Papel */
+  --bg-primary: #0f4f61;
+  /* Teal oscuro de marca */
+  --bg-secondary: #166f85;
+  /* Turquesa principal */
+  --bg-card: #1a7a94;
+  /* Turquesa más claro para cards */
+  --bg-elevated: #1d8fa8;
+  /* Turquesa aún más luminoso */
+  --bg-light: #f1eee9;
+  /* Papel - para secciones claras */
+  --bg-cream: #e3e3e3;
+  /* Blanco roto */
 
   /* Turquesa de marca */
   --teal: #166f85;
   --teal-light: #1d8fa8;
   --teal-dark: #0f4f61;
-  --teal-glow: rgba(22, 111, 133, 0.35);
+  --teal-glow: rgba(22, 111, 133, 0.4);
 
-  /* Naranja de marca (en lugar de gold) */
+  /* Naranja de marca como acento principal */
   --accent: #ed5c35;
   --accent-light: #ff7a56;
   --accent-dark: #c44920;
-  --accent-glow: rgba(237, 92, 53, 0.25);
+  --accent-glow: rgba(237, 92, 53, 0.3);
 
-  /* Mantener gold para detalles premium */
+  /* Gold para detalles premium */
   --gold: #c9a227;
   --gold-light: #e8c547;
   --gold-dark: #9a7b1c;
@@ -70,9 +78,13 @@
   --coral-light: #ff7a56;
   --coral-dark: #c44920;
 
-  --text-primary: #f5f5f5;
-  --text-secondary: #b0b0b0;
-  --text-muted: #707070;
+  /* Text colors - ajustados para fondos teal */
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.85);
+  --text-muted: rgba(255, 255, 255, 0.6);
+  --text-dark: #0f4f61;
+  /* Para textos sobre fondo claro */
+  --text-dark-muted: #166f85;
 
   --cream: #f1eee9;
   --paper: #e3e3e3;
