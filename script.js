@@ -77,10 +77,10 @@ const siteHeader = document.getElementById("siteHeader");
    -------------------------------------------------------------------------- */
 function renderMenu(category) {
   const items = menuData[category] || [];
-  
+
   // Clear grid with fade
   menuGrid.style.opacity = "0";
-  
+
   setTimeout(() => {
     menuGrid.innerHTML = items
       .map(
@@ -92,16 +92,16 @@ function renderMenu(category) {
         `
       )
       .join("");
-    
+
     // Fade in
     menuGrid.style.opacity = "1";
-    
+
     // Animate items
     const menuItems = menuGrid.querySelectorAll('.menu-item');
     menuItems.forEach((item, index) => {
       item.style.opacity = "0";
       item.style.transform = "translateY(20px)";
-      
+
       setTimeout(() => {
         item.style.transition = "opacity 0.4s ease, transform 0.4s ease";
         item.style.opacity = "1";
@@ -114,18 +114,18 @@ function renderMenu(category) {
 function setHighlight(daypart) {
   const data = highlights[daypart];
   if (!data) return;
-  
+
   const titleEl = menuHighlight.querySelector(".menu-highlight__title");
   const descEl = menuHighlight.querySelector(".menu-highlight__desc");
-  
+
   // Animate out
   menuHighlight.style.transform = "scale(0.95)";
   menuHighlight.style.opacity = "0.5";
-  
+
   setTimeout(() => {
     titleEl.textContent = data.title;
     descEl.textContent = data.desc;
-    
+
     // Animate in
     menuHighlight.style.transition = "transform 0.3s ease, opacity 0.3s ease";
     menuHighlight.style.transform = "scale(1)";
@@ -184,14 +184,14 @@ let lastScroll = 0;
 
 function handleScroll() {
   const currentScroll = window.pageYOffset;
-  
+
   // Add scrolled class when scrolled past threshold
   if (currentScroll > 50) {
     siteHeader.classList.add("scrolled");
   } else {
     siteHeader.classList.remove("scrolled");
   }
-  
+
   lastScroll = currentScroll;
 }
 
@@ -203,18 +203,18 @@ window.addEventListener("scroll", handleScroll, { passive: true });
 function bindNotify(id) {
   const btn = document.getElementById(id);
   if (!btn) return;
-  
+
   btn.addEventListener("click", () => {
     const input = btn.parentElement.querySelector('input');
     const email = input ? input.value.trim() : '';
-    
+
     if (email && email.includes('@')) {
       // Success state
       btn.textContent = "✓ Anotado";
       btn.disabled = true;
       btn.style.background = "linear-gradient(135deg, #166f85, #0f4f61)";
       btn.style.borderColor = "#166f85";
-      
+
       if (input) {
         input.disabled = true;
         input.style.opacity = "0.5";
@@ -224,7 +224,7 @@ function bindNotify(id) {
       btn.textContent = "Email inválido";
       btn.style.background = "#ed5c35";
       btn.style.borderColor = "#ed5c35";
-      
+
       setTimeout(() => {
         btn.textContent = id === "notifyBtn" ? "Avisame" : "Sumarme";
         btn.style.background = "";
@@ -273,7 +273,7 @@ if (heroBackground) {
   window.addEventListener("scroll", () => {
     const scrolled = window.pageYOffset;
     const heroHeight = document.querySelector(".hero").offsetHeight;
-    
+
     if (scrolled < heroHeight) {
       const parallaxValue = scrolled * 0.4;
       heroBackground.style.transform = `translateY(${parallaxValue}px) scale(1.1)`;
@@ -309,9 +309,140 @@ document.addEventListener("DOMContentLoaded", () => {
     loader.style.opacity = "0";
     setTimeout(() => loader.remove(), 300);
   }
-  
+
   // Add loaded class to body
   document.body.classList.add("loaded");
+
+  // Initialize new features
+  initCustomCursor();
+  initHeroSlideshow();
+  initScrollReveal();
 });
 
+/* --------------------------------------------------------------------------
+   CUSTOM CURSOR
+   -------------------------------------------------------------------------- */
+function initCustomCursor() {
+  const cursorDot = document.querySelector('.cursor-dot');
+  const cursorRing = document.querySelector('.cursor-ring');
+
+  if (!cursorDot || !cursorRing || window.innerWidth < 768) return;
+
+  let mouseX = 0, mouseY = 0;
+  let ringX = 0, ringY = 0;
+  let dotX = 0, dotY = 0;
+  let angle = 0;
+
+  // Track mouse position
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  // Smooth movement and rotation
+  function animateCursor() {
+    // Dot (Medialuna) followed with slight lag for smoothness
+    const dx = mouseX - dotX;
+    const dy = mouseY - dotY;
+
+    dotX += dx * 0.2;
+    dotY += dy * 0.2;
+
+    // Calculate rotation based on movement speed/direction
+    const speed = Math.sqrt(dx * dx + dy * dy);
+    if (speed > 1) {
+      const targetAngle = Math.atan2(dy, dx) * (180 / Math.PI) + 90;
+      angle += (targetAngle - angle) * 0.1;
+    }
+
+    cursorDot.style.transform = `translate(${dotX}px, ${dotY}px) translate(-50%, -50%) rotate(${angle}deg)`;
+
+    // Ring follows with more lag
+    ringX += (mouseX - ringX) * 0.1;
+    ringY += (mouseY - ringY) * 0.1;
+
+    cursorRing.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
+
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
+
+  // Click animation
+  document.addEventListener('mousedown', () => {
+    cursorDot.style.scale = '0.8';
+    cursorRing.style.scale = '1.3';
+    cursorRing.style.borderColor = 'var(--accent-light)';
+  });
+
+  document.addEventListener('mouseup', () => {
+    cursorDot.style.scale = '1';
+    cursorRing.style.scale = '1';
+    cursorRing.style.borderColor = 'var(--accent)';
+  });
+
+  // Hover effect on interactive elements
+  const interactives = document.querySelectorAll('a, button, .cuadro-card, .menu-item, .sticker, .tab, .pill');
+  interactives.forEach(el => {
+    el.addEventListener('mouseenter', () => cursorRing.classList.add('hover'));
+    el.addEventListener('mouseleave', () => cursorRing.classList.remove('hover'));
+  });
+
+  // Hide cursor when leaving window
+  document.addEventListener('mouseleave', () => {
+    cursorDot.style.opacity = '0';
+    cursorRing.style.opacity = '0';
+  });
+
+  document.addEventListener('mouseenter', () => {
+    cursorDot.style.opacity = '1';
+    cursorRing.style.opacity = '1';
+  });
+}
+
+/* --------------------------------------------------------------------------
+   HERO SLIDESHOW
+   -------------------------------------------------------------------------- */
+function initHeroSlideshow() {
+  const slides = document.querySelectorAll('.hero-slide');
+  if (slides.length <= 1) return;
+
+  let currentSlide = 0;
+  const totalSlides = slides.length;
+  const intervalTime = 5000; // 5 seconds per slide
+
+  function nextSlide() {
+    slides[currentSlide].classList.remove('active');
+    currentSlide = (currentSlide + 1) % totalSlides;
+    slides[currentSlide].classList.add('active');
+  }
+
+  // Start slideshow
+  setInterval(nextSlide, intervalTime);
+}
+
+/* --------------------------------------------------------------------------
+   SCROLL REVEAL ANIMATIONS (Enhanced)
+   -------------------------------------------------------------------------- */
+function initScrollReveal() {
+  const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+
+  if (!revealElements.length) return;
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, {
+    root: null,
+    rootMargin: '-50px',
+    threshold: 0.15
+  });
+
+  revealElements.forEach(el => revealObserver.observe(el));
+}
+
 console.log("🏫 La Vieja Escuela — Neo‑Bodegón · Bar Café · Tucumán");
+console.log("✨ UI Innovations loaded: VHS texture, custom cursor, slideshow, reveals");
