@@ -190,6 +190,24 @@ h1 {
 
 h2 {
   font-size: clamp(2rem, 4vw, 3.5rem);
+  position: relative;
+  display: inline-block;
+  margin-bottom: var(--space-lg);
+}
+
+h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: var(--accent);
+  transition: width 0.4s ease;
+}
+
+.section-head:hover h2::after {
+  width: 100%;
 }
 
 h3 {
@@ -201,7 +219,7 @@ h3 {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.25em;
-  color: var(--gold);
+  color: var(--accent);
 }
 
 /* --------------------------------------------------------------------------
@@ -217,32 +235,35 @@ h3 {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  border: 2px solid transparent;
+  border: 1px solid transparent;
+  /* Refined border */
   border-radius: var(--radius-sm);
   transition: all var(--transition-base);
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--teal), var(--teal-dark));
-  color: var(--text-primary);
+  background: var(--teal);
+  /* Solid brand color */
+  color: #ffffff;
   border-color: var(--teal);
-  box-shadow: var(--shadow-glow-teal);
+  box-shadow: var(--shadow-sm);
 }
 
 .btn-primary:hover {
-  background: linear-gradient(135deg, var(--teal-light), var(--teal));
+  background: var(--teal-light);
+  border-color: var(--teal-light);
   transform: translateY(-2px);
-  box-shadow: 0 0 40px var(--teal-glow), var(--shadow-md);
+  box-shadow: var(--shadow-md);
 }
 
 .btn-outline {
   background: transparent;
-  color: var(--gold);
-  border-color: var(--gold);
+  color: var(--accent);
+  border: 1px solid var(--accent);
 }
 
 .btn-outline:hover {
-  background: var(--gold);
+  background: var(--accent);
   color: var(--bg-primary);
   box-shadow: var(--shadow-glow-gold);
 }
@@ -250,7 +271,7 @@ h3 {
 .btn-ghost {
   background: transparent;
   color: var(--text-secondary);
-  border-color: var(--text-muted);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .btn-ghost:hover {
@@ -270,17 +291,22 @@ h3 {
   align-items: center;
   justify-content: space-between;
   padding: var(--space-md) 6vw;
-  background: rgba(10, 10, 10, 0.8);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(201, 162, 39, 0.2);
-  z-index: 100;
+  background: rgba(15, 79, 97, 0.85);
+  /* var(--teal-dark) with opacity */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  z-index: 1000;
   transition: all var(--transition-base);
 }
 
 .site-header.scrolled {
   padding: var(--space-sm) 6vw;
-  background: rgba(10, 10, 10, 0.95);
+  background: rgba(15, 79, 97, 0.95);
+  /* Darker on scroll */
+  backdrop-filter: blur(20px);
+  border-bottom-color: rgba(201, 162, 39, 0.2);
+  box-shadow: var(--shadow-sm);
 }
 
 .logo-wrap img {
@@ -315,15 +341,19 @@ h3 {
   bottom: 0;
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, var(--gold), var(--coral));
+  background: linear-gradient(90deg, var(--accent), var(--coral));
   transition: width var(--transition-base);
 }
 
-.site-nav a:hover {
+.site-nav a:hover,
+.site-nav a.active {
+  /* Added active state */
   color: var(--text-primary);
 }
 
-.site-nav a:hover::after {
+.site-nav a:hover::after,
+.site-nav a.active::after {
+  /* Added active state underline */
   width: 100%;
 }
 
@@ -371,9 +401,9 @@ h3 {
   gap: var(--space-sm);
   padding: var(--space-sm) var(--space-md);
   background: rgba(201, 162, 39, 0.15);
-  border: 1px solid var(--gold);
+  border: 1px solid var(--accent);
   border-radius: var(--radius-full);
-  color: var(--gold);
+  color: var(--accent);
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -503,6 +533,9 @@ h3 {
    -------------------------------------------------------------------------- */
 .menu {
   background: var(--bg-secondary);
+  position: relative;
+  overflow: visible;
+  /* Allow hands to extend beyond section */
 }
 
 .menu-controls {
@@ -557,7 +590,7 @@ h3 {
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  color: var(--gold);
+  color: var(--accent);
   margin-bottom: var(--space-xs);
 }
 
@@ -645,7 +678,8 @@ h3 {
 .proximamente {
   background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
   position: relative;
-  overflow: hidden;
+  overflow: visible;
+  /* Allow hands to extend beyond section */
 }
 
 .proximamente::before {
@@ -655,7 +689,7 @@ h3 {
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
 }
 
 .proxi-layout {
@@ -686,7 +720,7 @@ h3 {
 }
 
 .proxi-info h3 {
-  color: var(--gold);
+  color: var(--accent);
   margin-bottom: var(--space-lg);
 }
 
@@ -720,14 +754,24 @@ h3 {
   border-left-color: transparent;
 }
 
-.notify {
-  display: flex;
-  gap: var(--space-sm);
+.notify-container {
   max-width: 400px;
 }
 
-.notify input {
+.notify-form {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: flex-start;
+  /* Ensure button aligns with input top */
+}
+
+.notify-form .input-group {
   flex: 1;
+}
+
+.notify-form input {
+  width: 100%;
+  /* Take full width of group */
   padding: var(--space-md);
   background: var(--bg-card);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -737,13 +781,13 @@ h3 {
   transition: all var(--transition-fast);
 }
 
-.notify input:focus {
+.notify-form input:focus {
   outline: none;
   border-color: var(--teal);
   box-shadow: 0 0 0 3px var(--teal-glow);
 }
 
-.notify input::placeholder {
+.notify-form input::placeholder {
   color: var(--text-muted);
 }
 
@@ -758,6 +802,9 @@ h3 {
    -------------------------------------------------------------------------- */
 .aula {
   background: var(--bg-primary);
+  position: relative;
+  overflow: visible;
+  /* Allow hands to extend beyond section */
 }
 
 .aula-grid {
@@ -818,7 +865,7 @@ h3 {
   color: var(--teal-light);
 }
 
-.notify.inline {
+.notify-container.inline {
   max-width: 500px;
 }
 
@@ -854,7 +901,7 @@ h3 {
   text-transform: uppercase;
   font-size: 1rem;
   letter-spacing: 0.1em;
-  color: var(--gold);
+  color: var(--accent);
   margin-bottom: var(--space-md);
 }
 
@@ -904,7 +951,75 @@ h3 {
 }
 
 .map-info strong {
-  color: var(--gold);
+  display: block;
+  color: var(--accent);
+  margin-bottom: var(--space-xs);
+}
+
+.map-static {
+  height: 180px;
+  background: linear-gradient(135deg, var(--bg-secondary), var(--bg-elevated));
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: var(--space-md);
+  border: 1px dashed var(--text-muted);
+}
+
+.map-icon {
+  font-size: 2rem;
+  margin-bottom: var(--space-sm);
+}
+
+.map-actions {
+  display: flex;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+}
+
+.btn-sm {
+  padding: 8px 16px;
+  font-size: 0.75rem;
+}
+
+/* Form Feedback */
+.input-group {
+  position: relative;
+  flex: 1;
+}
+
+.input-error {
+  border-color: var(--coral) !important;
+  box-shadow: 0 0 0 1px var(--coral);
+}
+
+.input-success {
+  border-color: var(--teal) !important;
+}
+
+.form-message {
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  font-size: 0.7rem;
+  font-weight: 600;
+  opacity: 0;
+  transform: translateY(-5px);
+  transition: all var(--transition-fast);
+}
+
+.form-message.error {
+  color: var(--coral);
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.form-message.success {
+  color: var(--teal-light);
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .contact-card {
@@ -946,7 +1061,7 @@ h3 {
    -------------------------------------------------------------------------- */
 .ticker {
   padding: var(--space-md) 0;
-  background: var(--gold);
+  background: var(--accent);
   overflow: hidden;
 }
 
@@ -1011,7 +1126,7 @@ h3 {
 }
 
 .footer-links a:hover {
-  color: var(--gold);
+  color: var(--accent);
 }
 
 .footer-social {
@@ -1034,8 +1149,8 @@ h3 {
 }
 
 .footer-social a:hover {
-  background: var(--gold);
-  border-color: var(--gold);
+  background: var(--accent);
+  border-color: var(--accent);
   color: var(--bg-primary);
 }
 
@@ -1151,8 +1266,11 @@ h3 {
     width: 100%;
   }
 
-  .notify {
+  .notify-form {
     flex-direction: column;
+  }
+
+  .notify-container {
     max-width: 100%;
   }
 
@@ -1200,7 +1318,7 @@ h3 {
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, var(--gold), var(--coral));
+  background: linear-gradient(135deg, var(--teal-light), var(--accent));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -1342,28 +1460,29 @@ h3 {
    -------------------------------------------------------------------------- */
 .cursor-dot {
   position: fixed;
-  width: 32px;
-  height: 32px;
-  background: url('Manual%20de%20marca/Recursos%20graficos/medialuna%20icon.png') no-repeat center center;
+  width: 48px;
+  /* Increased from 32px */
+  height: 48px;
+  background: url('/Users/marcorossi/.gemini/antigravity/brain/c7d6c5b8-487c-4e70-ab76-3a4bcbef68b0/medialuna_cursor_transparent_1769912331229.png') no-repeat center center;
   background-size: contain;
   pointer-events: none;
   z-index: 10000;
-  transition: transform 0.08s ease-out;
-  /* Sharper following */
+  transition: transform 0.1s ease-out;
+  /* Slightly smoother */
   transform: translate(-50%, -50%) rotate(0deg);
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
 }
 
 .cursor-ring {
   position: fixed;
-  width: 45px;
-  height: 45px;
+  width: 60px;
+  /* Increased from 45px */
+  height: 60px;
   border: 1.5px solid var(--accent);
-  /* More orange to match the medialuna glow */
   border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
     width 0.3s ease,
     height 0.3s ease,
     border-color 0.3s ease,
@@ -1373,8 +1492,9 @@ h3 {
 }
 
 .cursor-ring.hover {
-  width: 65px;
-  height: 65px;
+  width: 85px;
+  /* Increased from 65px */
+  height: 85px;
   border-color: var(--teal-light);
   border-width: 2px;
   opacity: 1;
@@ -1516,6 +1636,9 @@ h3 {
 .galeria {
   background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
   overflow: hidden;
+  /* Restored to prevent layout shifts */
+  position: relative;
+  z-index: 10;
 }
 
 .galeria-grid {
@@ -1525,16 +1648,27 @@ h3 {
   perspective: 1000px;
   max-width: 1100px;
   margin: 0 auto;
+  padding-top: var(--space-xl);
+  /* Space for popping bubbles */
 }
 
 .cuadro-card {
   position: relative;
   aspect-ratio: 3/4;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
+  /* Removed overflow hidden to allow bubble */
+  overflow: visible;
   cursor: pointer;
   transform-style: preserve-3d;
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  /* Shadow moved to inner to respect radius */
+}
+
+.cuadro-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
   box-shadow:
     0 25px 50px -12px rgba(0, 0, 0, 0.4),
     0 0 0 1px rgba(255, 255, 255, 0.1);
@@ -1551,11 +1685,17 @@ h3 {
   transform: rotateY(-8deg) rotateX(5deg) scale(1.05);
 }
 
+.cuadro-card.has-bubble {
+  z-index: 100;
+  transform: rotateY(-8deg) rotateX(5deg) scale(1.05);
+  /* Keep hover state if bubble is open */
+}
+
 .cuadro-card:hover img {
   transform: scale(1.1);
 }
 
-.cuadro-card::after {
+.cuadro-inner::after {
   content: '';
   position: absolute;
   inset: 0;
@@ -1564,10 +1704,109 @@ h3 {
       rgba(237, 92, 53, 0.2) 100%);
   opacity: 0;
   transition: opacity 0.4s ease;
+  pointer-events: none;
 }
 
-.cuadro-card:hover::after {
+.cuadro-card:hover .cuadro-inner::after {
   opacity: 1;
+}
+
+/* Comic Speech Bubble */
+.comic-bubble {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) scale(0);
+  transform-origin: bottom center;
+  background: #fff;
+  color: #000;
+  padding: 10px 15px;
+  border: 3px solid #000;
+  border-radius: 20px;
+  font-family: 'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', sans-serif;
+  font-weight: bold;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  white-space: nowrap;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
+  z-index: 20;
+  opacity: 0;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+  pointer-events: none;
+  margin-bottom: 15px;
+  /* Spacing from card */
+}
+
+/* Triangle for bubble */
+.comic-bubble::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -10px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #000;
+}
+
+.comic-bubble::before {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -6px;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #fff;
+  z-index: 1;
+}
+
+.comic-bubble.show {
+  transform: translateX(-50%) scale(1);
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .comic-bubble {
+    font-size: 0.8rem;
+    padding: 8px 12px;
+    margin-bottom: 10px;
+    white-space: normal;
+    text-align: center;
+    width: max-content;
+    max-width: 200px;
+  }
+}
+
+.comic-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 10px 10px 0;
+  border-style: solid;
+  border-color: #000 transparent transparent transparent;
+  display: block;
+  width: 0;
+}
+
+.comic-bubble::before {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 8px 8px 0;
+  border-style: solid;
+  border-color: #fff transparent transparent transparent;
+  display: block;
+  width: 0;
+  z-index: 1;
 }
 
 .cuadro-label {
@@ -1722,4 +1961,255 @@ button:focus-visible {
 .tab.is-active,
 .pill.is-active {
   box-shadow: 0 0 20px rgba(237, 92, 53, 0.3);
+}
+
+/* --------------------------------------------------------------------------
+   TIENDA SECTION
+   -------------------------------------------------------------------------- */
+.tienda {
+  background: var(--bg-primary);
+}
+
+.tienda-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-xl);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* --------------------------------------------------------------------------
+   CARDS & PREMIUM UI
+   -------------------------------------------------------------------------- */
+.product-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    box-shadow 0.4s ease,
+    border-color 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  border-color: var(--accent);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.product-img {
+  aspect-ratio: 1;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.product-img .placeholder-img {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s ease;
+}
+
+/* --------------------------------------------------------------------------
+   ART DECO (Distributed Art)
+   -------------------------------------------------------------------------- */
+.art-deco {
+  position: absolute;
+  z-index: 10;
+  width: 180px;
+  /* Smaller decorative size */
+  pointer-events: auto;
+  /* Allow hover for speech bubble */
+}
+
+/* Specific Positions */
+.art-deco-1 {
+  /* La China in Menu */
+  top: 100px;
+  right: 5%;
+  transform: rotate(3deg);
+}
+
+.art-deco-2 {
+  /* Mona in Filosofia */
+  bottom: -40px;
+  left: 5%;
+  transform: rotate(-3deg);
+  z-index: 20;
+}
+
+.art-deco-3 {
+  /* Alto Guiso in Tienda */
+  top: -50px;
+  right: 10%;
+  transform: rotate(5deg);
+}
+
+/* Responsive Art Positioning */
+@media (max-width: 1024px) {
+  .art-deco {
+    display: none;
+    /* Hide art on smaller screens to avoid clutter, or adjust positions */
+  }
+}
+
+/* Increase Menu Presence */
+.menu {
+  padding-top: var(--space-2xl);
+  padding-bottom: var(--space-2xl);
+  min-height: 80vh;
+  /* Takes up substantial screen capability */
+  position: relative;
+}
+
+.product-card:hover .product-img .placeholder-img {
+  transform: scale(1.05);
+}
+
+.product-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-xs);
+}
+
+.product-info h3 {
+  font-family: var(--font-body);
+  /* Body font for "Fine" look */
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.product-info .price {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-sm);
+}
+
+.btn-text {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: all var(--transition-fast);
+  padding-bottom: 2px;
+}
+
+.btn-text:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+  transform: translateX(5px);
+}
+
+/* --------------------------------------------------------------------------
+   HERO LOOPING HANDS
+   -------------------------------------------------------------------------- */
+.hero-hand {
+  position: absolute;
+  z-index: 30;
+  pointer-events: none;
+  width: 220px;
+  filter: drop-shadow(6px 6px 0px rgba(0, 0, 0, 0.2));
+}
+
+/* Left hand - enters from left */
+.hero-hand-left {
+  left: -50px;
+  bottom: 10%;
+  animation: handLoopLeft 8s ease-in-out infinite;
+}
+
+/* Right hand - enters from right */
+.hero-hand-right {
+  right: -50px;
+  bottom: 15%;
+  animation: handLoopRight 8s ease-in-out infinite;
+  animation-delay: 4s;
+  /* Staggered entrance */
+}
+
+@keyframes handLoopLeft {
+  0% {
+    transform: translateX(-120%) rotate(-20deg);
+    opacity: 0;
+  }
+
+  15% {
+    transform: translateX(0) rotate(-5deg);
+    opacity: 1;
+  }
+
+  35% {
+    transform: translateX(0) rotate(-5deg);
+    opacity: 1;
+  }
+
+  50% {
+    transform: translateX(-120%) rotate(-20deg);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(-120%) rotate(-20deg);
+    opacity: 0;
+  }
+}
+
+@keyframes handLoopRight {
+  0% {
+    transform: translateX(120%) rotate(20deg);
+    opacity: 0;
+  }
+
+  15% {
+    transform: translateX(0) rotate(5deg);
+    opacity: 1;
+  }
+
+  35% {
+    transform: translateX(0) rotate(5deg);
+    opacity: 1;
+  }
+
+  50% {
+    transform: translateX(120%) rotate(20deg);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(120%) rotate(20deg);
+    opacity: 0;
+  }
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .hero-hand {
+    width: 140px;
+  }
+
+  .hero-hand-left {
+    left: -30px;
+    bottom: 5%;
+  }
+
+  .hero-hand-right {
+    right: -30px;
+    bottom: 8%;
+  }
 }

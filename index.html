@@ -89,68 +89,19 @@
         </div>
         <div class="hero-tags">
           <span class="sticker">Abundante</span>
-          <span class="sticker sticker--accent">Bonito</span>
+          <span class="sticker sticker--accent">Abundante</span>
           <span class="sticker sticker--teal">Cafecito y arrancamos</span>
         </div>
       </div>
+
+      <!-- Hero Looping Hands -->
+      <img src="Manual%20de%20marca/Recursos%20graficos/hand_coffee.png" class="hero-hand hero-hand-left" alt=""
+        aria-hidden="true" />
+      <img src="Manual%20de%20marca/Recursos%20graficos/hand_jug.png" class="hero-hand hero-hand-right" alt=""
+        aria-hidden="true" />
     </section>
 
-    <!-- Menu Section -->
-    <section id="menu" class="section menu">
-      <div class="section-head">
-        <h2>Menú Vivo</h2>
-        <p>Rotamos destacados según el momento del día. Elegí tu plan y te mostramos lo mejor.</p>
-      </div>
-
-      <div class="menu-controls">
-        <div class="pill-group" role="tablist" aria-label="Momento del día">
-          <button class="pill is-active" data-daypart="manana">Mañana</button>
-          <button class="pill" data-daypart="tarde">Tarde</button>
-          <button class="pill" data-daypart="noche">Noche</button>
-        </div>
-        <div class="menu-highlight" id="menuHighlight">
-          <div class="menu-highlight__label">★ Destacado</div>
-          <div class="menu-highlight__title">Combo La Vieja Escuela</div>
-          <div class="menu-highlight__desc">Café o infusión + 2 medialunas o tortillas.</div>
-        </div>
-      </div>
-
-      <div class="menu-tabs" role="tablist" aria-label="Categorías del menú">
-        <button class="tab is-active" data-category="desayuno">Desayuno & Merienda</button>
-        <button class="tab" data-category="cafe">Café & Infusiones</button>
-        <button class="tab" data-category="dulce">Cosas Dulces</button>
-        <button class="tab" data-category="salado">Cosas Saladas</button>
-        <button class="tab" data-category="cantina">Cantina Neo‑Bodegón</button>
-      </div>
-
-      <div class="menu-grid reveal-stagger" id="menuGrid" aria-live="polite"></div>
-    </section>
-
-    <!-- Galería de Arte Section -->
-    <section id="galeria" class="section galeria">
-      <div class="section-head reveal">
-        <h2>Arte de la Casa</h2>
-        <p>Cuadros originales que visten nuestras paredes. Nostalgia, cultura pop y sabor argentino.</p>
-      </div>
-      <div class="galeria-grid reveal-stagger">
-        <div class="cuadro-card reveal-scale">
-          <img src="Manual%20de%20marca/Recursos%20graficos/cuadro%20china.png" alt="Cuadro La China" loading="lazy" />
-          <div class="cuadro-label">La China</div>
-        </div>
-        <div class="cuadro-card reveal-scale">
-          <img src="Manual%20de%20marca/Recursos%20graficos/cuadro%20mona%20jimenez.png" alt="Cuadro Mona Jiménez"
-            loading="lazy" />
-          <div class="cuadro-label">Mona Jiménez</div>
-        </div>
-        <div class="cuadro-card reveal-scale">
-          <img src="Manual%20de%20marca/Recursos%20graficos/cuadro%20alto%20guiso.png" alt="Cuadro Alto Guiso"
-            loading="lazy" />
-          <div class="cuadro-label">Alto Guiso</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Proximamente Section -->
+    <!-- Proximamente Section (Moved Up) -->
     <section id="proximamente" class="section proximamente reveal">
       <div class="section-head">
         <h2>Próximamente</h2>
@@ -161,6 +112,7 @@
           <img src="Manual%20de%20marca/Recursos%20graficos/proximamente1.png"
             alt="Próximamente - Fachada La Vieja Escuela" />
         </div>
+
         <div class="proxi-info">
           <h3>Cartelera Inicial</h3>
           <ul>
@@ -168,14 +120,63 @@
             <li><strong>Semana 2:</strong> Panes de autor y sándwiches de barrio.</li>
             <li><strong>Semana 3:</strong> Noches de bodegón con platos clásicos.</li>
           </ul>
-          <div class="notify">
-            <input type="email" placeholder="Dejame tu mail para avisarte" aria-label="Email" />
-            <button class="btn btn-primary" id="notifyBtn">Avisame</button>
+          <div class="notify-container">
+            <form class="notify-form" id="formProximamente" novalidate>
+              <div class="input-group">
+                <input type="email" placeholder="Dejame tu mail para avisarte" aria-label="Email" required />
+                <span class="form-message"></span>
+              </div>
+              <button type="submit" class="btn btn-primary">Avisame</button>
+            </form>
+            <p class="fine">Sin spam. Te avisamos solo novedades reales.</p>
           </div>
-          <p class="fine">Sin spam. Te avisamos solo novedades reales.</p>
         </div>
       </div>
     </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="section menu">
+      <div class="section-head">
+        <h2>Menú Vivo</h2>
+        <p>Rotamos destacados según el momento del día. Elegí tu plan y te mostramos lo mejor.</p>
+
+
+        <!-- Art Decoration: La China -->
+        <div class="cuadro-card art-deco art-deco-1 reveal-scale" data-speech="TALADO EH?">
+          <div class="cuadro-inner">
+            <img src="Manual%20de%20marca/Recursos%20graficos/cuadro%20china.png" alt="Cuadro La China"
+              loading="lazy" />
+            <div class="cuadro-label">La China</div>
+          </div>
+        </div>
+
+
+
+        <div class="menu-controls">
+          <div class="pill-group" role="tablist" aria-label="Momento del día">
+            <button class="pill is-active" data-daypart="manana">Mañana</button>
+            <button class="pill" data-daypart="tarde">Tarde</button>
+            <button class="pill" data-daypart="noche">Noche</button>
+          </div>
+          <div class="menu-highlight" id="menuHighlight">
+            <div class="menu-highlight__label">★ Destacado</div>
+            <div class="menu-highlight__title">Combo La Vieja Escuela</div>
+            <div class="menu-highlight__desc">Café o infusión + 2 medialunas o tortillas.</div>
+          </div>
+        </div>
+
+        <div class="menu-tabs" role="tablist" aria-label="Categorías del menú">
+          <button class="tab is-active" data-category="desayuno">Desayuno & Merienda</button>
+          <button class="tab" data-category="cafe">Café & Infusiones</button>
+          <button class="tab" data-category="dulce">Cosas Dulces</button>
+          <button class="tab" data-category="salado">Cosas Saladas</button>
+          <button class="tab" data-category="cantina">Cantina Neo‑Bodegón</button>
+        </div>
+
+        <div class="menu-grid reveal-stagger" id="menuGrid" aria-live="polite"></div>
+    </section>
+
+
 
     <!-- Aula Section -->
     <section id="aula" class="section aula">
@@ -200,10 +201,17 @@
           <span class="event-meta">Sábado 11:30 · 50 min</span>
         </article>
       </div>
-      <div class="notify inline">
-        <input type="email" placeholder="Sumate a la lista del aula" aria-label="Email" />
-        <button class="btn btn-outline" id="aulaBtn">Sumarme</button>
+      <div class="notify-container inline">
+        <form class="notify-form" id="formAula" novalidate>
+          <div class="input-group">
+            <input type="email" placeholder="Sumate a la lista del aula" aria-label="Email" required />
+            <span class="form-message"></span>
+          </div>
+          <button type="submit" class="btn btn-outline">Sumarme</button>
+        </form>
       </div>
+
+
     </section>
 
     <!-- Filosofia Section -->
@@ -211,21 +219,85 @@
       <div class="section-head">
         <h2>Filosofía</h2>
         <p>Un neobodegón que respeta la historia y la eleva con técnica.</p>
-      </div>
-      <div class="filosofia-grid">
-        <div class="pill-card">
-          <h3>Calidad Técnica</h3>
-          <p>Gastronomía simple, bien ejecutada. Nada raro, todo perfecto.</p>
+
+
+        <!-- Art Decoration: Mona Jimenez -->
+        <div class="cuadro-card art-deco art-deco-2 reveal-scale" data-speech="EL ERA UN FEDERAL">
+          <div class="cuadro-inner">
+            <img src="Manual%20de%20marca/Recursos%20graficos/cuadro%20mona%20jimenez.png" alt="Cuadro Mona Jiménez"
+              loading="lazy" />
+            <div class="cuadro-label">Mona Jiménez</div>
+          </div>
         </div>
-        <div class="pill-card">
-          <h3>Nostalgia Activa</h3>
-          <p>90s, barrio y confort; con una experiencia moderna.</p>
+        <div class="filosofia-grid">
+          <div class="pill-card">
+            <h3>Calidad Técnica</h3>
+            <p>Gastronomía simple, bien ejecutada. Nada raro, todo perfecto.</p>
+          </div>
+          <div class="pill-card">
+            <h3>Nostalgia Activa</h3>
+            <p>90s, barrio y confort; con una experiencia moderna.</p>
+          </div>
+          <div class="pill-card">
+            <h3>Flexibilidad Viva</h3>
+            <p>Menú corto y dinámico. Rotamos según estación y demanda.</p>
+          </div>
         </div>
-        <div class="pill-card">
-          <h3>Flexibilidad Viva</h3>
-          <p>Menú corto y dinámico. Rotamos según estación y demanda.</p>
+    </section>
+
+    <!-- Tienda Section -->
+    <section id="tienda" class="section tienda reveal">
+      <div class="section-head">
+        <h2>Tienda de Barrio</h2>
+        <p>Objetos y café para llevar la experiencia a tu casa.</p>
+
+
+        <!-- Art Decoration: Alto Guiso -->
+        <div class="cuadro-card art-deco art-deco-3 reveal-scale" data-speech="CON 15 PESO..">
+          <div class="cuadro-inner">
+            <img src="Manual%20de%20marca/Recursos%20graficos/cuadro%20alto%20guiso.png" alt="Cuadro Alto Guiso"
+              loading="lazy" />
+            <div class="cuadro-label">Alto Guiso</div>
+          </div>
         </div>
-      </div>
+        <div class="tienda-grid reveal-stagger">
+          <!-- Product 1 -->
+          <div class="product-card">
+            <div class="product-img">
+              <div class="placeholder-img" style="background: #1a1a1a;"></div>
+            </div>
+            <div class="product-info">
+              <h3>Café de la Casa (250g)</h3>
+              <p class="price">$12.500</p>
+              <a href="https://wa.me/5493815555555?text=Hola,%20quiero%20comprar%20el%20Café%20de%20la%20Casa!"
+                target="_blank" class="btn-text">Comprar &rarr;</a>
+            </div>
+          </div>
+          <!-- Product 2 -->
+          <div class="product-card">
+            <div class="product-img">
+              <div class="placeholder-img" style="background: #222;"></div>
+            </div>
+            <div class="product-info">
+              <h3>Tostado Blend (1kg)</h3>
+              <p class="price">$42.000</p>
+              <a href="https://wa.me/5493815555555?text=Hola,%20quiero%20comprar%20el%20Pack%201kg!" target="_blank"
+                class="btn-text">Comprar &rarr;</a>
+            </div>
+          </div>
+          <!-- Product 3 -->
+          <div class="product-card">
+            <div class="product-img">
+              <div class="placeholder-img" style="background: #151515;"></div>
+            </div>
+            <div class="product-info">
+              <h3>Tote Bag "Escuela"</h3>
+              <p class="price">$8.500</p>
+              <a href="https://wa.me/5493815555555?text=Hola,%20quiero%20la%20Tote%20Bag!" target="_blank"
+                class="btn-text">Comprar &rarr;</a>
+            </div>
+          </div>
+        </div>
     </section>
 
     <!-- Ubicacion Section -->
@@ -235,11 +307,24 @@
         <p>Barrio Norte, Tucumán. Un refugio para trabajar, comer y volver.</p>
       </div>
       <div class="ubicacion-grid">
-        <div class="map-card">
-          <div class="map-placeholder">📍 Mapa próximamente</div>
+        <div class="map-card" id="mapCard">
+          <div class="map-static">
+            <div class="map-icon">📍</div>
+            <p>Barrio Norte, Tucumán</p>
+          </div>
           <div class="map-info">
-            <strong>Dirección:</strong> Av. ______ 1234, Tucumán<br />
-            <strong>Horarios:</strong> Lun a Dom · 8:00 a 23:00
+            <strong>Dirección a confirmar</strong>
+            <p>Av. ______ 1234, San Miguel de Tucumán</p>
+          </div>
+          <div class="map-actions">
+            <button class="btn btn-outline btn-sm" id="btnCopyAddress"
+              data-address="Av. ______ 1234, San Miguel de Tucumán">
+              <span>Copiar</span>
+            </button>
+            <a href="https://maps.google.com/?q=San+Miguel+de+Tucuman" target="_blank" rel="noopener noreferrer"
+              class="btn btn-primary btn-sm">
+              <span>Abrir Mapa</span>
+            </a>
           </div>
         </div>
         <div class="contact-card">
@@ -276,6 +361,7 @@
         <a href="#menu">Menú</a>
         <a href="#proximamente">Próximamente</a>
         <a href="#aula">Aula Abierta</a>
+        <a href="#tienda">Tienda</a>
         <a href="#ubicacion">Ubicación</a>
       </nav>
       <div class="footer-social">

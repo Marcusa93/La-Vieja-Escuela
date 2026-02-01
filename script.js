@@ -52,18 +52,22 @@ const menuData = {
 };
 
 // Highlights by day part
+// Highlights by day part with suggested category
 const highlights = {
   manana: {
     title: "Combo La Vieja Escuela",
-    desc: "Café o infusión + 2 medialunas o tortillas."
+    desc: "Café o infusión + 2 medialunas o tortillas.",
+    category: "desayuno"
   },
   tarde: {
     title: "Combo Jarrito & Pastafrola",
-    desc: "Café con leche en jarrito + porción de pastafrola."
+    desc: "Café con leche en jarrito + porción de pastafrola.",
+    category: "dulce"
   },
   noche: {
     title: "Milanesa Napolitana",
-    desc: "Clásico de bodegón, versión afinada."
+    desc: "Clásico de bodegón, versión afinada.",
+    category: "cantina"
   }
 };
 
@@ -78,20 +82,34 @@ const siteHeader = document.getElementById("siteHeader");
 function renderMenu(category) {
   const items = menuData[category] || [];
 
+  // Update UI Tabs
+  document.querySelectorAll(".tab").forEach(t => {
+    t.classList.toggle("is-active", t.dataset.category === category);
+  });
+
   // Clear grid with fade
   menuGrid.style.opacity = "0";
 
   setTimeout(() => {
-    menuGrid.innerHTML = items
-      .map(
-        (item, index) => `
-          <div class="menu-item" style="animation-delay: ${index * 50}ms">
-            <strong>${item.name}</strong>
-            <span>${item.desc}</span>
-          </div>
-        `
-      )
-      .join("");
+    if (items.length === 0) {
+      // Empty state
+      menuGrid.innerHTML = `
+        <div class="empty-state">
+          <p>No hay items disponibles por ahora.</p>
+        </div>
+      `;
+    } else {
+      menuGrid.innerHTML = items
+        .map(
+          (item, index) => `
+            <div class="menu-item" style="animation-delay: ${index * 50}ms">
+              <strong>${item.name}</strong>
+              <span>${item.desc}</span>
+            </div>
+          `
+        )
+        .join("");
+    }
 
     // Fade in
     menuGrid.style.opacity = "1";
@@ -111,30 +129,59 @@ function renderMenu(category) {
   }, 200);
 }
 
-function setHighlight(daypart) {
+function setHighlight(daypart, shouldUpdateUrl = true) {
   const data = highlights[daypart];
   if (!data) return;
+
+  // Update Pills
+  document.querySelectorAll(".pill").forEach(p => {
+    p.classList.toggle("is-active", p.dataset.daypart === daypart);
+  });
 
   const titleEl = menuHighlight.querySelector(".menu-highlight__title");
   const descEl = menuHighlight.querySelector(".menu-highlight__desc");
 
-  // Animate out
-  menuHighlight.style.transform = "scale(0.95)";
-  menuHighlight.style.opacity = "0.5";
+  // Animate card out
+  menuHighlight.style.transform = "scale(0.98)";
+  menuHighlight.style.opacity = "0.7";
 
   setTimeout(() => {
     titleEl.textContent = data.title;
     descEl.textContent = data.desc;
 
-    // Animate in
-    menuHighlight.style.transition = "transform 0.3s ease, opacity 0.3s ease";
+    // Animate card in
+    menuHighlight.style.transition = "transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease";
     menuHighlight.style.transform = "scale(1)";
     menuHighlight.style.opacity = "1";
   }, 150);
+
+  // Switch category if relevant
+  if (data.category) {
+    renderMenu(data.category);
+  }
+
+  // Update URL
+  if (shouldUpdateUrl) {
+    const url = new URL(window.location);
+    url.searchParams.set("momento", daypart);
+    window.history.pushState({}, "", url);
+  }
 }
 
-// Initialize menu
-renderMenu("desayuno");
+// Initialize menu from URL or default
+function initMenu() {
+  const params = new URLSearchParams(window.location.search);
+  const initialMoment = params.get("momento") || "manana";
+
+  if (highlights[initialMoment]) {
+    setHighlight(initialMoment, false);
+  } else {
+    setHighlight("manana", false);
+  }
+}
+
+// Call init instead of direct render
+initMenu();
 
 /* --------------------------------------------------------------------------
    TAB CONTROLS
@@ -142,8 +189,7 @@ renderMenu("desayuno");
 const tabs = document.querySelectorAll(".tab");
 tabs.forEach((tab) => {
   tab.addEventListener("click", () => {
-    tabs.forEach((t) => t.classList.remove("is-active"));
-    tab.classList.add("is-active");
+    // Manual category switch doesn't change "moment"
     renderMenu(tab.dataset.category);
   });
 });
@@ -151,8 +197,6 @@ tabs.forEach((tab) => {
 const pills = document.querySelectorAll(".pill");
 pills.forEach((pill) => {
   pill.addEventListener("click", () => {
-    pills.forEach((p) => p.classList.remove("is-active"));
-    pill.classList.add("is-active");
     setHighlight(pill.dataset.daypart);
   });
 });
@@ -180,16 +224,19 @@ scrollButtons.forEach((btn) => {
 /* --------------------------------------------------------------------------
    HEADER SCROLL EFFECT
    -------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------
+   HEADER SCROLL & SCROLL SPY
+   -------------------------------------------------------------------------- */
 let lastScroll = 0;
+const siteHeaderEl = document.getElementById("siteHeader");
 
 function handleScroll() {
   const currentScroll = window.pageYOffset;
 
-  // Add scrolled class when scrolled past threshold
   if (currentScroll > 50) {
-    siteHeader.classList.add("scrolled");
+    siteHeaderEl.classList.add("scrolled");
   } else {
-    siteHeader.classList.remove("scrolled");
+    siteHeaderEl.classList.remove("scrolled");
   }
 
   lastScroll = currentScroll;
@@ -197,45 +244,130 @@ function handleScroll() {
 
 window.addEventListener("scroll", handleScroll, { passive: true });
 
-/* --------------------------------------------------------------------------
-   NOTIFY BUTTON HANDLERS
-   -------------------------------------------------------------------------- */
-function bindNotify(id) {
-  const btn = document.getElementById(id);
-  if (!btn) return;
+// Scroll Spy
+function initScrollSpy() {
+  const sections = document.querySelectorAll("section[id]");
+  const navLinks = document.querySelectorAll(".site-nav a");
 
-  btn.addEventListener("click", () => {
-    const input = btn.parentElement.querySelector('input');
-    const email = input ? input.value.trim() : '';
+  const observerOptions = {
+    root: null,
+    rootMargin: "-20% 0px -60% 0px", // Active when section is near top
+    threshold: 0
+  };
 
-    if (email && email.includes('@')) {
-      // Success state
-      btn.textContent = "✓ Anotado";
-      btn.disabled = true;
-      btn.style.background = "linear-gradient(135deg, #166f85, #0f4f61)";
-      btn.style.borderColor = "#166f85";
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute("id");
 
-      if (input) {
-        input.disabled = true;
-        input.style.opacity = "0.5";
+        // Remove active from all
+        navLinks.forEach(link => link.classList.remove("active"));
+
+        // Add active to current
+        const activeLink = document.querySelector(`.site-nav a[href="#${id}"]`);
+        if (activeLink) {
+          activeLink.classList.add("active");
+        }
       }
-    } else {
-      // Error state
-      btn.textContent = "Email inválido";
-      btn.style.background = "#ed5c35";
-      btn.style.borderColor = "#ed5c35";
+    });
+  }, observerOptions);
 
-      setTimeout(() => {
-        btn.textContent = id === "notifyBtn" ? "Avisame" : "Sumarme";
-        btn.style.background = "";
-        btn.style.borderColor = "";
-      }, 2000);
-    }
+  sections.forEach((section) => {
+    observer.observe(section);
   });
 }
 
-bindNotify("notifyBtn");
-bindNotify("aulaBtn");
+document.addEventListener("DOMContentLoaded", initScrollSpy);
+
+/* --------------------------------------------------------------------------
+   FORM HANDLERS
+   -------------------------------------------------------------------------- */
+function initEmailForm(formId) {
+  const form = document.getElementById(formId);
+  if (!form) return;
+
+  const input = form.querySelector("input[type='email']");
+  const button = form.querySelector("button");
+  const message = form.querySelector(".form-message");
+
+  // Real-time validation
+  input.addEventListener("input", () => {
+    // Clear errors on type
+    input.classList.remove("input-error");
+    message.className = "form-message";
+    message.textContent = "";
+  });
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const email = input.value.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    // Reset states
+    input.classList.remove("input-error", "input-success");
+    message.className = "form-message";
+
+    if (!emailRegex.test(email)) {
+      // Error State
+      input.classList.add("input-error");
+      message.textContent = "Por favor, ingresá un email válido.";
+      message.classList.add("error");
+      input.focus();
+      return;
+    }
+
+    // Success State (Simulated API call)
+    button.disabled = true;
+    const originalText = button.textContent;
+    button.textContent = "Enviando...";
+
+    setTimeout(() => {
+      input.classList.add("input-success");
+      message.textContent = "¡Gracias! Te avisaremos pronto.";
+      message.classList.add("success");
+
+      button.textContent = "✓ Listo";
+      button.style.background = "var(--teal)";
+      button.style.borderColor = "var(--teal)";
+      button.style.color = "#fff";
+
+      form.reset();
+      input.disabled = true;
+    }, 1500);
+  });
+}
+
+initEmailForm("formProximamente");
+initEmailForm("formAula");
+
+/* --------------------------------------------------------------------------
+   MAP ACTIONS
+   -------------------------------------------------------------------------- */
+function initMapActions() {
+  const btnCopy = document.getElementById("btnCopyAddress");
+  if (!btnCopy) return;
+
+  btnCopy.addEventListener("click", () => {
+    const address = btnCopy.dataset.address;
+
+    navigator.clipboard.writeText(address).then(() => {
+      const originalText = btnCopy.querySelector("span").textContent;
+      btnCopy.querySelector("span").textContent = "¡Copiado!";
+      btnCopy.classList.add("btn-primary");
+      btnCopy.classList.remove("btn-outline");
+
+      setTimeout(() => {
+        btnCopy.querySelector("span").textContent = originalText;
+        btnCopy.classList.remove("btn-primary");
+        btnCopy.classList.add("btn-outline");
+      }, 2000);
+    }).catch(err => {
+      console.error("Error al copiar: ", err);
+    });
+  });
+}
+
+initMapActions();
 
 /* --------------------------------------------------------------------------
    INTERSECTION OBSERVER FOR ANIMATIONS
@@ -257,7 +389,11 @@ const fadeInObserver = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Observe sections for fade-in animation
+// Observe sections for fade-in animation
 document.querySelectorAll(".section").forEach((section) => {
+  // If section handles its own reveal, skip generic fade-in
+  if (section.classList.contains("reveal")) return;
+
   section.style.opacity = "0";
   section.style.transform = "translateY(30px)";
   section.style.transition = "opacity 0.6s ease, transform 0.6s ease";
@@ -317,6 +453,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initCustomCursor();
   initHeroSlideshow();
   initScrollReveal();
+  initComicBubbles();
 });
 
 /* --------------------------------------------------------------------------
@@ -345,14 +482,16 @@ function initCustomCursor() {
     const dx = mouseX - dotX;
     const dy = mouseY - dotY;
 
-    dotX += dx * 0.2;
-    dotY += dy * 0.2;
+    // Smoother "floaty" feel
+    dotX += dx * 0.15;
+    dotY += dy * 0.15;
 
     // Calculate rotation based on movement speed/direction
     const speed = Math.sqrt(dx * dx + dy * dy);
     if (speed > 1) {
       const targetAngle = Math.atan2(dy, dx) * (180 / Math.PI) + 90;
-      angle += (targetAngle - angle) * 0.1;
+      // Smoother rotation interpolation
+      angle += (targetAngle - angle) * 0.08;
     }
 
     cursorDot.style.transform = `translate(${dotX}px, ${dotY}px) translate(-50%, -50%) rotate(${angle}deg)`;
@@ -444,5 +583,82 @@ function initScrollReveal() {
   revealElements.forEach(el => revealObserver.observe(el));
 }
 
+/* --------------------------------------------------------------------------
+   DECO HAND ANIMATIONS
+   -------------------------------------------------------------------------- */
+function initHandAnimations() {
+  const hands = document.querySelectorAll('.deco-hand');
+  if (!hands.length) return;
+
+  // Observe parent SECTIONS, not the hands themselves
+  // (Hands start off-screen so they never "intersect")
+  const sectionsWithHands = new Set();
+  hands.forEach(hand => {
+    const section = hand.closest('section');
+    if (section) sectionsWithHands.add(section);
+  });
+
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      // Find all hands inside this section
+      const handsInSection = entry.target.querySelectorAll('.deco-hand');
+      handsInSection.forEach(hand => {
+        if (entry.isIntersecting) {
+          hand.classList.remove('hidden');
+          hand.classList.add('active');
+        } else {
+          hand.classList.remove('active');
+          hand.classList.add('hidden');
+        }
+      });
+    });
+  }, {
+    threshold: 0.2, // Trigger when 20% of section is visible
+    rootMargin: '0px'
+  });
+
+  sectionsWithHands.forEach(section => sectionObserver.observe(section));
+}
+
+/* --------------------------------------------------------------------------
+   COMIC BUBBLES
+   -------------------------------------------------------------------------- */
+function initComicBubbles() {
+  const cuadros = document.querySelectorAll('.cuadro-card');
+
+  cuadros.forEach(cuadro => {
+    // Create bubble element
+    const bubble = document.createElement('div');
+    bubble.classList.add('comic-bubble');
+    bubble.textContent = cuadro.dataset.speech;
+    cuadro.appendChild(bubble);
+
+    // Handle click
+    cuadro.addEventListener('click', (e) => {
+      e.stopPropagation(); // Prevent closing immediately
+
+      // Close other bubbles and remove active class from other cards
+      document.querySelectorAll('.comic-bubble').forEach(b => {
+        if (b !== bubble) {
+          b.classList.remove('show');
+          b.parentElement.classList.remove('has-bubble');
+        }
+      });
+
+      // Toggle current
+      bubble.classList.toggle('show');
+      cuadro.classList.toggle('has-bubble');
+    });
+  });
+
+  // Close on outside click
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.comic-bubble').forEach(b => {
+      b.classList.remove('show');
+      b.parentElement.classList.remove('has-bubble');
+    });
+  });
+}
+
 console.log("🏫 La Vieja Escuela — Neo‑Bodegón · Bar Café · Tucumán");
-console.log("✨ UI Innovations loaded: VHS texture, custom cursor, slideshow, reveals");
+console.log("✨ UI Innovations loaded: VHS texture, custom cursor, slideshow, reveals, comic bubbles");
