@@ -2123,93 +2123,96 @@ button:focus-visible {
   position: absolute;
   z-index: 30;
   pointer-events: none;
-  width: 220px;
-  filter: drop-shadow(6px 6px 0px rgba(0, 0, 0, 0.2));
+  filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.4));
+  mix-blend-mode: multiply;
+  /* Makes white background transparent on dark bg */
 }
 
-/* Left hand - enters from left */
+/* Left hand (coffee cup) - enters from left, BIGGER */
 .hero-hand-left {
-  left: -50px;
-  bottom: 10%;
-  animation: handLoopLeft 8s ease-in-out infinite;
+  left: -30px;
+  bottom: 5%;
+  width: 320px;
+  /* Bigger */
+  animation: handLoopLeft 10s ease-in-out infinite;
 }
 
-/* Right hand - enters from right */
+/* Right hand (jug pouring) - enters from TOP */
 .hero-hand-right {
-  right: -50px;
-  bottom: 15%;
-  animation: handLoopRight 8s ease-in-out infinite;
-  animation-delay: 4s;
+  right: 5%;
+  top: -50px;
+  width: 280px;
+  animation: handLoopTop 10s ease-in-out infinite;
+  animation-delay: 5s;
   /* Staggered entrance */
 }
 
 @keyframes handLoopLeft {
   0% {
-    transform: translateX(-120%) rotate(-20deg);
+    transform: translateX(-120%) rotate(-15deg);
     opacity: 0;
   }
 
-  15% {
-    transform: translateX(0) rotate(-5deg);
+  12% {
+    transform: translateX(0) rotate(-3deg);
     opacity: 1;
   }
 
-  35% {
-    transform: translateX(0) rotate(-5deg);
+  38% {
+    transform: translateX(0) rotate(-3deg);
     opacity: 1;
   }
 
   50% {
-    transform: translateX(-120%) rotate(-20deg);
+    transform: translateX(-120%) rotate(-15deg);
     opacity: 0;
   }
 
   100% {
-    transform: translateX(-120%) rotate(-20deg);
+    transform: translateX(-120%) rotate(-15deg);
     opacity: 0;
   }
 }
 
-@keyframes handLoopRight {
+/* Jug comes from TOP (pouring motion) */
+@keyframes handLoopTop {
   0% {
-    transform: translateX(120%) rotate(20deg);
+    transform: translateY(-120%) rotate(5deg);
     opacity: 0;
   }
 
-  15% {
-    transform: translateX(0) rotate(5deg);
+  12% {
+    transform: translateY(0) rotate(-5deg);
     opacity: 1;
   }
 
-  35% {
-    transform: translateX(0) rotate(5deg);
+  38% {
+    transform: translateY(0) rotate(-5deg);
     opacity: 1;
   }
 
   50% {
-    transform: translateX(120%) rotate(20deg);
+    transform: translateY(-120%) rotate(5deg);
     opacity: 0;
   }
 
   100% {
-    transform: translateX(120%) rotate(20deg);
+    transform: translateY(-120%) rotate(5deg);
     opacity: 0;
   }
 }
 
 /* Mobile adjustments */
 @media (max-width: 768px) {
-  .hero-hand {
-    width: 140px;
-  }
-
   .hero-hand-left {
-    left: -30px;
-    bottom: 5%;
+    width: 200px;
+    left: -20px;
+    bottom: 3%;
   }
 
   .hero-hand-right {
-    right: -30px;
-    bottom: 8%;
+    width: 180px;
+    right: 3%;
+    top: -30px;
   }
 }
