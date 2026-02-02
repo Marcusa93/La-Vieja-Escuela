@@ -450,11 +450,39 @@ document.addEventListener("DOMContentLoaded", () => {
   document.body.classList.add("loaded");
 
   // Initialize new features
+  initMobileMenu();
   initCustomCursor();
   initHeroSlideshow();
   initScrollReveal();
   initComicBubbles();
 });
+
+/* --------------------------------------------------------------------------
+   MOBILE MENU TOGGLE
+   -------------------------------------------------------------------------- */
+function initMobileMenu() {
+  const navToggle = document.getElementById('navToggle');
+  const siteNav = document.querySelector('.site-nav');
+
+  if (!navToggle || !siteNav) return;
+
+  navToggle.addEventListener('click', () => {
+    const isOpen = navToggle.classList.toggle('is-active');
+    siteNav.classList.toggle('is-open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  // Close menu when clicking a link
+  siteNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navToggle.classList.remove('is-active');
+      siteNav.classList.remove('is-open');
+      navToggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    });
+  });
+}
 
 /* --------------------------------------------------------------------------
    CUSTOM CURSOR
