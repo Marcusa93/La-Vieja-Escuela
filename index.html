@@ -12,17 +12,7 @@
 </head>
 
 <body>
-  <!-- VHS Texture Overlay -->
-  <div class="vhs-overlay" aria-hidden="true"></div>
 
-  <!-- Custom Cursor -->
-  <div class="cursor-dot" aria-hidden="true"></div>
-  <div class="cursor-ring" aria-hidden="true"></div>
-
-  <!-- Floating Coffee Cup Animation -->
-  <div class="floating-cup" aria-hidden="true">
-    <img src="taza%20latte.png" alt="" />
-  </div>
 
   <!-- Header -->
   <header class="site-header" id="siteHeader">
@@ -31,6 +21,7 @@
     </a>
     <nav class="site-nav" aria-label="Navegación principal">
       <a href="#menu">Menú</a>
+      <a href="#tienda">Tienda</a>
       <a href="#galeria">Arte</a>
       <a href="#proximamente">Próximamente</a>
       <a href="#aula">Aula Abierta</a>
@@ -42,7 +33,7 @@
       <span class="nav-toggle__bar"></span>
     </button>
     <div class="header-cta">
-      <button class="btn btn-outline" data-scroll="#menu">Ver Menú</button>
+      <button class="btn btn-outline" data-scroll="#tienda">Pedir online</button>
     </div>
   </header>
 
@@ -86,11 +77,11 @@
         <p class="hero-subtitle">
           Nostalgia activa, técnica real y una cantina que abraza lo clásico.
           Un espacio para comer, aprender y encontrarnos.
-          Café con oficio y platos que reconfortan.
+          Panadería de masa madre y café de especialidad.
         </p>
         <div class="hero-actions">
-          <button class="btn btn-primary" data-scroll="#menu">Explorar Menú</button>
-          <button class="btn btn-ghost" data-scroll="#proximamente">Ver Agenda</button>
+          <button class="btn btn-primary" data-scroll="#tienda">Pedir online</button>
+          <button class="btn btn-ghost" data-scroll="#menu">Ver Menú</button>
         </div>
         <div class="hero-tags">
           <span class="sticker">Abundante</span>
@@ -99,11 +90,25 @@
         </div>
       </div>
 
-      <!-- Hero Looping Hands -->
-      <img src="Manual%20de%20marca/Recursos%20graficos/hand_coffee.png" class="hero-hand hero-hand-left" alt=""
-        aria-hidden="true" />
-      <img src="Manual%20de%20marca/Recursos%20graficos/hand_jug.png" class="hero-hand hero-hand-right" alt=""
-        aria-hidden="true" />
+
+    </section>
+
+    <!-- Quick Info Strip -->
+    <section class="quick-info" aria-label="Información rápida">
+      <div class="quick-info__grid">
+        <div class="quick-info__item">
+          <span class="quick-info__label">Horarios</span>
+          <strong class="quick-info__value">Próximamente</strong>
+        </div>
+        <div class="quick-info__item">
+          <span class="quick-info__label">Ubicación</span>
+          <strong class="quick-info__value">Barrio Norte, Tucumán</strong>
+        </div>
+        <div class="quick-info__item">
+          <span class="quick-info__label">Pedidos online</span>
+          <strong class="quick-info__value">Fudo (próximamente)</strong>
+        </div>
+      </div>
     </section>
 
     <!-- Proximamente Section (Moved Up) -->
@@ -253,8 +258,8 @@
     <!-- Tienda Section -->
     <section id="tienda" class="section tienda reveal">
       <div class="section-head">
-        <h2>Tienda de Barrio</h2>
-        <p>Objetos y café para llevar la experiencia a tu casa.</p>
+        <h2>Pedidos online</h2>
+        <p>Panadería de masa madre, café y dulces para llevar la experiencia a tu casa.</p>
 
 
         <!-- Art Decoration: Alto Guiso -->
@@ -268,38 +273,47 @@
         <div class="tienda-grid reveal-stagger">
           <!-- Product 1 -->
           <div class="product-card">
-            <div class="product-img">
-              <div class="placeholder-img" style="background: #1a1a1a;"></div>
-            </div>
+            <div class="product-img product-img--texture" aria-hidden="true"></div>
             <div class="product-info">
-              <h3>Café de la Casa (250g)</h3>
-              <p class="price">$12.500</p>
-              <a href="https://wa.me/5493815555555?text=Hola,%20quiero%20comprar%20el%20Café%20de%20la%20Casa!"
-                target="_blank" class="btn-text">Comprar &rarr;</a>
+              <h3>Pan de masa madre</h3>
+              <p class="price">Precio en Fudo</p>
+              <a href="#tienda" class="btn-text is-pending" data-fudo="pending">Ver en Fudo &rarr;</a>
             </div>
           </div>
           <!-- Product 2 -->
           <div class="product-card">
-            <div class="product-img">
-              <div class="placeholder-img" style="background: #222;"></div>
-            </div>
+            <div class="product-img product-img--texture" aria-hidden="true"></div>
             <div class="product-info">
-              <h3>Tostado Blend (1kg)</h3>
-              <p class="price">$42.000</p>
-              <a href="https://wa.me/5493815555555?text=Hola,%20quiero%20comprar%20el%20Pack%201kg!" target="_blank"
-                class="btn-text">Comprar &rarr;</a>
+              <h3>Focaccia de romero</h3>
+              <p class="price">Precio en Fudo</p>
+              <a href="#tienda" class="btn-text is-pending" data-fudo="pending">Ver en Fudo &rarr;</a>
             </div>
           </div>
           <!-- Product 3 -->
           <div class="product-card">
-            <div class="product-img">
-              <div class="placeholder-img" style="background: #151515;"></div>
-            </div>
+            <div class="product-img product-img--texture" aria-hidden="true"></div>
             <div class="product-info">
-              <h3>Tote Bag "Escuela"</h3>
-              <p class="price">$8.500</p>
-              <a href="https://wa.me/5493815555555?text=Hola,%20quiero%20la%20Tote%20Bag!" target="_blank"
-                class="btn-text">Comprar &rarr;</a>
+              <h3>Galletas de manteca</h3>
+              <p class="price">Precio en Fudo</p>
+              <a href="#tienda" class="btn-text is-pending" data-fudo="pending">Ver en Fudo &rarr;</a>
+            </div>
+          </div>
+          <!-- Product 4 -->
+          <div class="product-card">
+            <div class="product-img product-img--texture" aria-hidden="true"></div>
+            <div class="product-info">
+              <h3>Café en grano (250g)</h3>
+              <p class="price">Precio en Fudo</p>
+              <a href="#tienda" class="btn-text is-pending" data-fudo="pending">Ver en Fudo &rarr;</a>
+            </div>
+          </div>
+          <!-- Product 5 -->
+          <div class="product-card">
+            <div class="product-img product-img--texture" aria-hidden="true"></div>
+            <div class="product-info">
+              <h3>Café molido (250g)</h3>
+              <p class="price">Precio en Fudo</p>
+              <a href="#tienda" class="btn-text is-pending" data-fudo="pending">Ver en Fudo &rarr;</a>
             </div>
           </div>
         </div>
@@ -334,12 +348,13 @@
         </div>
         <div class="contact-card">
           <h3>Contacto</h3>
-          <p>Reservas, eventos y consultas.</p>
+          <p>Consultas y eventos. No tomamos reservas.</p>
           <div class="contact-info">
             <div>WhatsApp: +54 9 381 ___ ____</div>
             <div>Mail: hola@laviejaescuela.com</div>
             <div>Instagram: @laviejaescuela</div>
           </div>
+          <p class="fine">Pedidos online por Fudo (próximamente).</p>
           <button class="btn btn-primary" data-scroll="#menu">Ver Menú Completo</button>
         </div>
       </div>

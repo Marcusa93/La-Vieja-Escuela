@@ -451,10 +451,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Initialize new features
   initMobileMenu();
-  initCustomCursor();
   initHeroSlideshow();
   initScrollReveal();
-  initComicBubbles();
 });
 
 /* --------------------------------------------------------------------------
@@ -484,87 +482,7 @@ function initMobileMenu() {
   });
 }
 
-/* --------------------------------------------------------------------------
-   CUSTOM CURSOR
-   -------------------------------------------------------------------------- */
-function initCustomCursor() {
-  const cursorDot = document.querySelector('.cursor-dot');
-  const cursorRing = document.querySelector('.cursor-ring');
-
-  if (!cursorDot || !cursorRing || window.innerWidth < 768) return;
-
-  let mouseX = 0, mouseY = 0;
-  let ringX = 0, ringY = 0;
-  let dotX = 0, dotY = 0;
-  let angle = 0;
-
-  // Track mouse position
-  document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-  });
-
-  // Smooth movement and rotation
-  function animateCursor() {
-    // Dot (Medialuna) followed with slight lag for smoothness
-    const dx = mouseX - dotX;
-    const dy = mouseY - dotY;
-
-    // Smoother "floaty" feel
-    dotX += dx * 0.15;
-    dotY += dy * 0.15;
-
-    // Calculate rotation based on movement speed/direction
-    const speed = Math.sqrt(dx * dx + dy * dy);
-    if (speed > 1) {
-      const targetAngle = Math.atan2(dy, dx) * (180 / Math.PI) + 90;
-      // Smoother rotation interpolation
-      angle += (targetAngle - angle) * 0.08;
-    }
-
-    cursorDot.style.transform = `translate(${dotX}px, ${dotY}px) translate(-50%, -50%) rotate(${angle}deg)`;
-
-    // Ring follows with more lag
-    ringX += (mouseX - ringX) * 0.1;
-    ringY += (mouseY - ringY) * 0.1;
-
-    cursorRing.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
-
-    requestAnimationFrame(animateCursor);
-  }
-  animateCursor();
-
-  // Click animation
-  document.addEventListener('mousedown', () => {
-    cursorDot.style.scale = '0.8';
-    cursorRing.style.scale = '1.3';
-    cursorRing.style.borderColor = 'var(--accent-light)';
-  });
-
-  document.addEventListener('mouseup', () => {
-    cursorDot.style.scale = '1';
-    cursorRing.style.scale = '1';
-    cursorRing.style.borderColor = 'var(--accent)';
-  });
-
-  // Hover effect on interactive elements
-  const interactives = document.querySelectorAll('a, button, .cuadro-card, .menu-item, .sticker, .tab, .pill');
-  interactives.forEach(el => {
-    el.addEventListener('mouseenter', () => cursorRing.classList.add('hover'));
-    el.addEventListener('mouseleave', () => cursorRing.classList.remove('hover'));
-  });
-
-  // Hide cursor when leaving window
-  document.addEventListener('mouseleave', () => {
-    cursorDot.style.opacity = '0';
-    cursorRing.style.opacity = '0';
-  });
-
-  document.addEventListener('mouseenter', () => {
-    cursorDot.style.opacity = '1';
-    cursorRing.style.opacity = '1';
-  });
-}
+/* Removed Custom Cursor Logic */
 
 /* --------------------------------------------------------------------------
    HERO SLIDESHOW
@@ -611,82 +529,9 @@ function initScrollReveal() {
   revealElements.forEach(el => revealObserver.observe(el));
 }
 
-/* --------------------------------------------------------------------------
-   DECO HAND ANIMATIONS
-   -------------------------------------------------------------------------- */
-function initHandAnimations() {
-  const hands = document.querySelectorAll('.deco-hand');
-  if (!hands.length) return;
+/* Removed Deco Hand Animations */
 
-  // Observe parent SECTIONS, not the hands themselves
-  // (Hands start off-screen so they never "intersect")
-  const sectionsWithHands = new Set();
-  hands.forEach(hand => {
-    const section = hand.closest('section');
-    if (section) sectionsWithHands.add(section);
-  });
-
-  const sectionObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      // Find all hands inside this section
-      const handsInSection = entry.target.querySelectorAll('.deco-hand');
-      handsInSection.forEach(hand => {
-        if (entry.isIntersecting) {
-          hand.classList.remove('hidden');
-          hand.classList.add('active');
-        } else {
-          hand.classList.remove('active');
-          hand.classList.add('hidden');
-        }
-      });
-    });
-  }, {
-    threshold: 0.2, // Trigger when 20% of section is visible
-    rootMargin: '0px'
-  });
-
-  sectionsWithHands.forEach(section => sectionObserver.observe(section));
-}
-
-/* --------------------------------------------------------------------------
-   COMIC BUBBLES
-   -------------------------------------------------------------------------- */
-function initComicBubbles() {
-  const cuadros = document.querySelectorAll('.cuadro-card');
-
-  cuadros.forEach(cuadro => {
-    // Create bubble element
-    const bubble = document.createElement('div');
-    bubble.classList.add('comic-bubble');
-    bubble.textContent = cuadro.dataset.speech;
-    cuadro.appendChild(bubble);
-
-    // Handle click
-    cuadro.addEventListener('click', (e) => {
-      e.stopPropagation(); // Prevent closing immediately
-
-      // Close other bubbles and remove active class from other cards
-      document.querySelectorAll('.comic-bubble').forEach(b => {
-        if (b !== bubble) {
-          b.classList.remove('show');
-          b.parentElement.classList.remove('has-bubble');
-        }
-      });
-
-      // Toggle current
-      bubble.classList.toggle('show');
-      cuadro.classList.toggle('has-bubble');
-    });
-  });
-
-  // Close on outside click
-  document.addEventListener('click', () => {
-    document.querySelectorAll('.comic-bubble').forEach(b => {
-      b.classList.remove('show');
-      b.parentElement.classList.remove('has-bubble');
-    });
-  });
-}
+/* Removed Comic Bubbles */
 
 console.log("🏫 La Vieja Escuela — Neo‑Bodegón · Bar Café · Tucumán");
-console.log("✨ UI Innovations loaded: VHS texture, custom cursor, slideshow, reveals, comic bubbles");
+console.log("✨ UI Innovations loaded: Slideshow, Reveals, Smooth Scroll");
